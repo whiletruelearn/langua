@@ -57,7 +57,12 @@ For more details see [language-detection Wiki](https://code.google.com/archive/p
 Original project
 ================
 
-This is a vectorized modification of Langdetect(https://github.com/Mimino666/langdetect) . There are some numpy optimizations and other tweaks
+This is a vectorized modification of [Langdetect](https://github.com/Mimino666/langdetect) . There are some numpy optimizations and other tweaks
 which have improved the performance of predicting the language class.
 
 LangDetect was a port of another project called [language-detection](https://code.google.com/p/language-detection/)
+
+Pushing to PyPi
+=================
+
+Refer [this](https://packaging.python.org/tutorials/distributing-packages/) 
