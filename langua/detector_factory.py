@@ -115,7 +115,7 @@ class DetectorFactory(object):
 
 
 PROFILES_DIRECTORY = path.join(path.dirname(__file__), 'profiles')
-_factory = None
+
 
 class DetectLang(object):
     def __init__(self):
@@ -123,7 +123,7 @@ class DetectLang(object):
         self.factory.load_profile(PROFILES_DIRECTORY)
         self.detector = self.factory.create()
 
-    def detect_text(self,text):
+    def detect_text(self, text):
         self.detector.append(text)
         return self.detector.detect()
 
