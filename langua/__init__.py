@@ -1,2 +1,2 @@
-from .detector_factory import DetectorFactory, PROFILES_DIRECTORY
+from .detector_factory import DetectorFactory
 from .predict_lang import Predict
