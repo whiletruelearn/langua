@@ -1,4 +1,4 @@
-from detector_factory import DetectorFactory
+from .detector_factory import DetectorFactory
 from os import path
 
 PROFILES_DIRECTORY = path.join(path.dirname(__file__), 'profiles')
