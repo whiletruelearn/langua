@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include NOTICE
+include MANIFEST.in
+include requirements.txt
+include langua/utils/messages.properties
+recursive-include langua/profiles *

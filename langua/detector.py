@@ -24,21 +24,7 @@ class Detector(object):
     The detector has some parameters for language detection.
     See set_alpha(double), .set_max_text_length(int) .set_prior_map(dict).
 
-    Example:
 
-        from langdetect.detector_factory import DetectorFactory
-        factory = DetectorFactory()
-        factory.load_profile('/path/to/profile/directory')
-
-        def detect(text):
-            detector = factory.create()
-            detector.append(text)
-            return detector.detect()
-
-        def detect_langs(text):
-            detector = factory.create()
-            detector.append(text)
-            return detector.get_probabilities()
     '''
 
     ALPHA_DEFAULT = 0.5
