@@ -179,6 +179,8 @@ class Detector(object):
         else:
             prob = np.ones((1,len(self.langlist)))
             prob = prob / len(self.langlist)
+
+
             return prob
 
     def _extract_ngrams(self):
@@ -224,10 +226,13 @@ class Detector(object):
 
     def _normalize_prob(self, prob):
         '''Normalize probabilities and check convergence by the maximun probability.
+
         '''
 
-        prob = prob / sum(prob)
-        return np.max(prob)
+        prob /= np.sum(prob)
+        maxp = np.max(prob)
+
+        return maxp
 
     def _sort_probability(self, prob):
         result = [Language(lang, p) for (lang, p) in zip(self.langlist, list(prob)[0]) if p > self.PROB_THRESHOLD]
