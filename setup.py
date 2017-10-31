@@ -12,7 +12,7 @@ with open('LICENSE') as f:
 
 setup(
     name='langua',
-    version='1.0.7',
+    version='1.0.8',
     description='Faster port of Language detection built by Shuyo in Python',
     long_description=readme,
     author='Krishna Sangeeth KS',

@@ -87,6 +87,7 @@ class Detector(object):
         If the total size of target text exceeds the limit size specified by
         Detector.set_max_text_length(int), the rest is cut down.
         '''
+        self.text =''
         text = self.URL_RE.sub(' ', text)
         text = self.MAIL_RE.sub(' ', text)
         text = NGram.normalize_vi(text)
@@ -125,8 +126,7 @@ class Detector(object):
         return self.UNKNOWN_LANG
 
     def get_probabilities(self):
-        if self.langprob is None:
-            self._detect_block()
+        self._detect_block()
         return self._sort_probability(self.langprob)
 
     def _detect_block(self):
