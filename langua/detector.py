@@ -135,7 +135,7 @@ class Detector(object):
         if not ngrams:
             raise LangDetectException(ErrorCode.CantDetectError, 'No features in text.')
 
-        self.langprob = np.zeros((1,len(self.langlist)))
+        self.langprob = np.zeros((len(self.langlist),1))
 
         self.random.seed(self.seed)
         for t in xrange(self.n_trial):
@@ -145,7 +145,7 @@ class Detector(object):
             i = 0
             while True:
                 self._update_lang_prob(prob, self.random.choice(ngrams), alpha)
-                if i % 5 == 0:
+                if i % 3 == 0:
                     if self._normalize_prob(prob) > self.CONV_THRESHOLD or i >= self.ITERATION_LIMIT:
                         break
                     if self.verbose:
@@ -160,13 +160,12 @@ class Detector(object):
         '''Initialize the map of language probabilities.
         If there is the specified prior map, use it as initial map.
         '''
+        N = len(self.langlist)
         if self.prior_map is not None:
             return list(self.prior_map)
         else:
-            prob = np.ones((1,len(self.langlist)))
-            prob = prob / len(self.langlist)
-
-
+            prob = np.ones((N,1))
+            prob /= N
             return prob
 
     def _extract_ngrams(self):
@@ -194,7 +193,7 @@ class Detector(object):
             return False
 
 
-        lang_prob_map = np.array(self.word_lang_prob_map[word]).reshape(1, len(self.langlist))
+        lang_prob_map = np.array(self.word_lang_prob_map[word]).reshape(len(self.langlist), 1 )
         if self.verbose:
             six.print_('%s(%s): %s' % (word, self._unicode_encode(word), self._word_prob_to_string(lang_prob_map)))
 
@@ -221,7 +220,7 @@ class Detector(object):
         return maxp
 
     def _sort_probability(self, prob):
-        result = [Language(lang, p) for (lang, p) in zip(self.langlist, list(prob)[0]) if p > self.PROB_THRESHOLD]
+        result = [Language(lang, p) for (lang, p) in zip(self.langlist, list(prob[:, 0])) if p > self.PROB_THRESHOLD]
         result.sort(reverse=True)
         return result
 
