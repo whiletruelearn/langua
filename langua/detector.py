@@ -144,7 +144,7 @@ class Detector(object):
 
             i = 0
             while True:
-                self._update_lang_prob(prob, np.random.choice(ngrams), alpha)
+                self._update_lang_prob(prob, self.random.choice(ngrams), alpha)
                 if i % 5 == 0:
                     if self._normalize_prob(prob) > self.CONV_THRESHOLD or i >= self.ITERATION_LIMIT:
                         break
