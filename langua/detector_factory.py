@@ -1,6 +1,7 @@
 import os
 from os import path
 import sys
+import numpy as np
 
 try:
     import simplejson as json
@@ -85,7 +86,7 @@ class DetectorFactory(object):
 
         for word in profile.freq:
             if word not in self.word_lang_prob_map:
-                self.word_lang_prob_map[word] = [0.0] * langsize
+                self.word_lang_prob_map[word] = np.zeros((langsize, 1))
             length = len(word)
             if 1 <= length <= 3:
                 prob = 1.0 * profile.freq.get(word) / profile.n_words[length - 1]

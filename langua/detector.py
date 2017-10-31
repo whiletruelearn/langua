@@ -193,12 +193,12 @@ class Detector(object):
             return False
 
 
-        lang_prob_map = np.array(self.word_lang_prob_map[word]).reshape(len(self.langlist), 1 )
+        lang_prob_map = self.word_lang_prob_map[word]
         if self.verbose:
             six.print_('%s(%s): %s' % (word, self._unicode_encode(word), self._word_prob_to_string(lang_prob_map)))
 
         weight = alpha / self.BASE_FREQ
-        prob *= weight + lang_prob_map
+        prob *= lang_prob_map + weight
         return True
 
     def _word_prob_to_string(self, prob):
