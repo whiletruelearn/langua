@@ -26,10 +26,31 @@ To detect the language of the text:
 ```python
 >>> from langua import Predict
 >>> p = Predict()
->>> p.get_lang("War doesn't show who's right, just who's left.")
+>>> p.get_lang("Mother")
 'en'
->>> p.get_lang("Ein, zwei, drei, vier")
-'de'
+>>> p.get_lang(u"தாய்")
+'ta'
+>>> p.get_lang(u"അമ്മ")
+'ml'
+```
+
+Benchmark Results
+==================
+
+```python
+>>> from langua import Predict
+>>> p = Predict()
+>>> %%timeit
+   ...: p.get_lang(u"ഇംഗ്ലീഷ്")
+   ...:
+1000 loops, best of 3: 721 µs per loop
+
+
+>>> from langdetect import detect
+>>> %%timeit
+   ...: detect(u"ഇംഗ്ലീഷ്")
+1000 loops, best of 3: 1.07 ms per loop
+
 ```
 
 
