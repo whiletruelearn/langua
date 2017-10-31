@@ -132,7 +132,7 @@ class Detector(object):
     def _detect_block(self):
         self.cleaning_text()
         ngrams = self._extract_ngrams()
-        if not ngrams:
+        if len(ngrams) == 0:
             raise LangDetectException(ErrorCode.CantDetectError, 'No features in text.')
 
         self.langprob = np.zeros((len(self.langlist),1))
@@ -140,12 +140,12 @@ class Detector(object):
         self.random.seed(self.seed)
         for t in xrange(self.n_trial):
             prob = self._init_probability()
-            alpha = self.alpha + self.random.gauss(0.0, 1.0) * self.ALPHA_WIDTH
+            alpha = self.alpha + np.random.normal(0.0, 1.0) * self.ALPHA_WIDTH
 
             i = 0
             while True:
-                self._update_lang_prob(prob, self.random.choice(ngrams), alpha)
-                if i % 3 == 0:
+                self._update_lang_prob(prob, np.random.choice(ngrams), alpha)
+                if i % 5 == 0:
                     if self._normalize_prob(prob) > self.CONV_THRESHOLD or i >= self.ITERATION_LIMIT:
                         break
                     if self.verbose:
@@ -185,7 +185,7 @@ class Detector(object):
                 w = ngram.grams[-n:]
                 if w and w != ' ' and w in self.word_lang_prob_map:
                     result.append(w)
-        return result
+        return np.array(result)
 
     def _update_lang_prob(self, prob, word, alpha):
         '''Update language probabilities with N-gram string(N=1,2,3).'''
